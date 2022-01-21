@@ -1,0 +1,43 @@
+<div class="max-w-[640px] mx-auto">
+  <h1 class="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-[25px]">Post Update Confirmation</h1>
+
+  <div class="max-w-[640px] mx-auto">
+  <%= form_with scope: @update_form do |form| %>
+    <div class="relative pb-4 mb-3">
+      <%= form.label :title, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :title, disabled: true, class: "appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200" %>
+    </div>
+
+    <div class="relative pb-4 mb-3">
+      <%= form.label :description, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_area :description, disabled: true, rows: 7, class: "appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :status, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <div>
+        <label class="relative w-16 h-10 flex justify-between items-center group text-xl">
+          <%= form.check_box :status, disabled: true, class: "absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md cursor-pointer" %>
+          <span class="w-16 h-10 flex items-center flex-shrink-0 p-1 bg-gray-300 rounded-full duration-300 ease-in-out peer-checked:bg-green-400 after:w-8 after:h-8 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-6 group-hover:after:translate-x-1 cursor-pointer"></span>
+        </label>
+      </div>
+    </div>
+
+    <%= form.hidden_field :title %>
+    <%= form.hidden_field :description %>
+    <%= form.hidden_field :status %>
+    <%= form.hidden_field :updated_user_id, :value => current_user.id %>
+
+    <div>
+      <%= form.submit "Update Post", class: "px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-green-600 bg-green-50 border-green-200 hover:bg-green-100 active:bg-green-200 focus:ring-green-300 cursor-pointer" %>
+      <%= link_to "Cancel", :back, class: "px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-red-600 bg-red-50 border-red-200 hover:bg-red-100 active:bg-red-200 focus:ring-red-300 cursor-pointer" %>
+    </div>
+  <% end %>
+</div>
+
+
+  <br>
+</div>
+<div>
+  <%= link_to "Back to posts", posts_path, class: "mx-[5px] px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100 active:bg-gray-200 focus:ring-gray-300" %>
+</div>

@@ -1,0 +1,48 @@
+<div class="max-w-[940px] mx-auto rounded p-6 mt-4 border-solid border border-gray-300">
+  <h1 class="text-xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-[25px]"> 
+    Post Detail
+  </h1>
+    <div class="text-gray-700">
+      <div class="grid md:grid-cols-2 text-sm pb-6">
+        <div class="grid grid-cols-2">
+          <div class="px-4 py-2 font-semibold">Title</div>
+          <div class="px-4 py-2"> <%= @post.title %> </div>
+        </div>
+        <div class="grid grid-cols-2">
+          <div class="px-4 py-2 font-semibold">Description</div>
+          <div class="px-4 py-2"> <%= @post.description %> </div>
+        </div>
+        <div class="grid grid-cols-2">
+          <div class="px-4 py-2 font-semibold">Status</div>
+          <div class="px-4 py-2"> <%= @post.status == "0" ? 'Active' : 'Not Active' %> </div>
+        </div>
+        <div class="grid grid-cols-2">
+          <div class="px-4 py-2 font-semibold">Created by</div>
+          <div class="px-4 py-2">
+            <%= @post.created_user.name %>
+          </div>
+        </div>
+        <div class="grid grid-cols-2">
+          <div class="px-4 py-2 font-semibold">Created at</div>
+          <div class="px-4 py-2">
+            <%= @post.created_at.strftime('%Y/%m/%d') %>
+          </div>
+        </div>
+        <div class="grid grid-cols-2">
+          <div class="px-4 py-2 font-semibold">Updated by</div>
+          <div class="px-4 py-2">
+            <%= @post.updated_user.name %>
+          </div>
+        </div>
+        <div class="grid grid-cols-2">
+          <div class="px-4 py-2 font-semibold">Updated at</div>
+          <div class="px-4 py-2">
+            <%= @post.updated_at.strftime('%Y/%m/%d') %>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="mt-4">
+  <%= link_to "Back to posts", posts_path, class: "mx-[5px] px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100 active:bg-gray-200 focus:ring-gray-300" %>
+</div>

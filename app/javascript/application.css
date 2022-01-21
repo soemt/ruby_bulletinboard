@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.dataTables_paginate {
+  @apply relative z-0 inline-flex rounded-md shadow-sm -space-x-px;
+}
+
+.paginate_button {
+  @apply relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer;
+}
+
+.paginate_button.previous {
+  @apply relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+}
+
+.paginate_button.next {
+  @apply relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+}
+
+.paginate_button.disabled {
+  @apply opacity-80 cursor-default;
+}
+
+.paginate_button.current {
+  @apply z-10 bg-indigo-50 border-indigo-500 text-indigo-600;
+}

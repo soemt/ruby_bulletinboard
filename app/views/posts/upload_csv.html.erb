@@ -1,0 +1,33 @@
+<% if flash[:error] %>
+  <div class="error-box bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-4 rounded relative">
+    <span class="block">
+      <%= flash[:error] %>
+    </span>
+    <span class="close-btn absolute top-0 bottom-0 right-0 px-4 py-3">
+      <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+    </span>
+  </div>
+<% end %>
+<div class="flex justify-center">
+  <%= form_tag import_posts_path, method: :post, multipart: true do %>
+    <div class="mb-3 w-96">
+      <%= label_tag "Import post:", nil, class: "form-label inline-block mb-2 text-gray-700" %>
+      <%= file_field_tag :file, class: "form-control
+      block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" %>
+      <%= submit_tag 'Import', class: "mt-5 px-4 py-2 rounded-md text-sm font-medium border-0 focus:outline-none focus:ring transition text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 cursor-pointer" %>
+    </div>
+  <% end %>
+</div>

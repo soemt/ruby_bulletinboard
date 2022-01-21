@@ -1,0 +1,88 @@
+<div class="max-w-[640px] mx-auto">
+<h1 class="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-[25px]">Editing Post</h1>
+
+<div class="max-w-[640px] mx-auto">
+  <%= form_with model: @update_form, url: update_confirm_post_path(@update_form.id), method: :get do |form| %>
+    <div class="relative pb-4 mb-3">
+      <%= form.label :title, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_field :title, class: "appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" %>
+      <% if @update_form.errors[:title].present? %>
+        <svg
+            class="h-5 w-5 text-red-500 absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+        >
+          <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clip-rule="evenodd"
+          />
+        </svg>
+        <span class="mt-2 text-sm text-red-500">
+          <%= @update_form.errors[:title][0] %>
+        </span>
+      <% end %>
+    </div>
+
+    <div class="relative pb-4 mb-3">
+      <%= form.label :description, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= form.text_area :description, rows: 7, class: "appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" %>
+      <% if @update_form.errors[:description].present? %>
+        <svg
+            class="h-5 w-5 text-red-500 absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+        >
+          <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clip-rule="evenodd"
+          />
+        </svg>
+        <span class="mt-2 text-sm text-red-500">
+          <%= @update_form.errors[:description][0] %>
+        </span>
+      <% end %>
+    </div>
+    
+    <div class="mb-4">
+      <%= form.label :status, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <div>
+        <label class="relative w-16 h-10 flex justify-between items-center group text-xl">
+          <%= form.check_box :status, class: "absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md cursor-pointer" %>
+          <span class="w-16 h-10 flex items-center flex-shrink-0 p-1 bg-gray-300 rounded-full duration-300 ease-in-out peer-checked:bg-green-400 after:w-8 after:h-8 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-6 group-hover:after:translate-x-1 cursor-pointer"></span>
+        </label>
+      </div>
+    </div>
+
+    <% if current_user.present? %>
+      <%= form.hidden_field :id, :value => @update_form.id %>
+      <%= form.hidden_field :updated_user_id, :value => current_user.id %>
+    <% end %>
+
+    <div>
+      <%= form.submit "Update Post", class: "px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-green-600 bg-green-50 border-green-200 hover:bg-green-100 active:bg-green-200 focus:ring-green-300 cursor-pointer" %>
+      <input type="reset" value="clear" class="clear-btn px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-red-600 bg-red-50 border-red-200 hover:bg-red-100 active:bg-red-200 focus:ring-red-300 cursor-pointer">
+      <span class="clear-msg text-sm text-red-500 hidden ml-4"> Form cleared! </span>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function () {
+
+    $(".clear-btn").on("click", function () {
+      $(".clear-msg").removeClass("hidden");
+      setTimeout(function() {
+          $(".clear-msg").addClass("hidden");
+      }, 3000);
+    });
+  })
+</script>
+
+
+<br>
+</div>
+<div>
+  <%= link_to "Back to posts", posts_path, class: "mx-[5px] px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100 active:bg-gray-200 focus:ring-gray-300" %>
+</div>

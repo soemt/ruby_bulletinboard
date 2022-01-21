@@ -1,0 +1,107 @@
+<div class="max-w-[940px] mx-auto rounded p-6 mt-4 border-solid border border-gray-300">
+  <h1 class="text-xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-[25px]"> 
+    Editing <%= @user.name %> 
+  </h1>
+  <%= form_with(model: @user) do |form| %>
+  <div class="flex">
+    <div class="">
+      <img src="<%= @user.profile %>" id="profileImg" class="shadow-xl rounded-full align-middle border-none min-w-[150px] max-w-[150px] h-[150px]">
+      <div class="mt-2 text-center">
+        <label class="text-blue-500 text-sm font-semibold cursor-pointer">
+          <%= form.file_field :profile, id: "profileUpload", class:"hidden form-control col-sm-5", :accept => "image/x-png,image/gif,image/jpeg" %>
+          Edit profile picture
+        </label>
+      </div>
+    </div>
+    <div class="border-solid mx-4 border-r border-gray-300 pr-4">
+    </div>
+    <div class="text-gray-700">
+      <div class="grid md:grid-cols-2 text-sm pb-6 gap-1">
+        <div class="grid grid-cols-3">
+          <div class="u-l-edit u-l-edit px-4 py-2 font-semibold">Name</div>
+          <div class="py-2 col-span-2"> 
+            <%= form.text_field :name, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-2 leading-tight focus:outline-none focus:bg-white" %> 
+          </div>
+        </div>
+        <div class="grid grid-cols-3">
+          <div class="u-l-edit px-4 py-2 font-semibold">Email</div>
+          <div class="py-2 col-span-2"> 
+            <%= form.text_field :email, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-2 leading-tight focus:outline-none focus:bg-white" %> 
+          </div>
+        </div>
+        <div class="grid grid-cols-3">
+          <div class="u-l-edit px-4 py-2 font-semibold">Password</div>
+          <div class="u-l-edit py-2 col-span-2"> 
+            <%= link_to "Change password", change_password_url(@user.name), class: "text-blue-500 text-sm font-semibold cursor-pointer" %>
+          </div>
+        </div>
+        <% if @is_Admin %>
+        <div class="grid grid-cols-3">
+          <div class="u-l-edit px-4 py-2 font-semibold">Type</div>
+          <div class="select-wrapper py-2 col-span-2">
+            <%= form.select(:role, options_for_select([['Admin', 0], ['User', 1]], @current_user.role), {}, {class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-2 leading-tight focus:outline-none focus:bg-white"}) %>
+          </div>
+        </div>
+        <% end %>
+        <div class="grid grid-cols-3">
+          <div class="u-l-edit px-4 py-2 font-semibold">Phone No.</div>
+          <div class="py-2 col-span-2"> 
+            <%= form.text_field :phone, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-2 leading-tight focus:outline-none focus:bg-white" %> 
+          </div>
+        </div>
+        <div class="grid grid-cols-3">
+          <div class="u-l-edit px-4 py-2 font-semibold">Birthday</div>
+          <div class="py-2 col-span-2"> 
+            <%= form.date_field :dob, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-2 leading-tight focus:outline-none focus:bg-white" %>  
+          </div>
+        </div>
+        <div class="grid grid-cols-3">
+          <div class="px-4 py-2 font-semibold">Address</div>
+          <div class="py-2 col-span-2"> 
+            <%= form.text_area :address, rows: 2, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-2 leading-tight focus:outline-none focus:bg-white" %>  
+          </div>
+        </div>
+        <%= form.hidden_field :created_user_id, :value => current_user.id%>
+        <%= form.hidden_field :updated_user_id, :value => current_user.id%>
+      </div>
+      <div class="w-full px-4">
+        <%= form.submit "Save Changes", class: "px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-green-600 bg-green-50 border-green-200 hover:bg-green-100 active:bg-green-200 focus:ring-green-300 cursor-pointer" %>
+        <input type="reset" value="clear" class="clear-btn px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-red-600 bg-red-50 border-red-200 hover:bg-red-100 active:bg-red-200 focus:ring-red-300 cursor-pointer">
+        <span class="clear-msg text-sm text-red-500 hidden ml-4"> Form cleared! </span>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<br>
+
+<div>
+  <%= link_to "Back to profile", profile_path(@user), class: "mx-[5px] px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100 active:bg-gray-200 focus:ring-gray-300" %>
+</div>
+
+<script>
+  function showImage(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#profileImg')
+          .attr('src', e.target.result)
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $('#profileUpload').on('change', function() {
+    showImage(this);
+  })
+
+  $(".clear-btn").on("click", function () {
+    $(".clear-msg").removeClass("hidden");
+    setTimeout(function() {
+        $(".clear-msg").addClass("hidden");
+    }, 3000);
+  });
+</script>

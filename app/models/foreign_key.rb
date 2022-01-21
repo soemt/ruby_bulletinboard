@@ -1,0 +1,2 @@
+class ForeignKey < ApplicationRecord
+end

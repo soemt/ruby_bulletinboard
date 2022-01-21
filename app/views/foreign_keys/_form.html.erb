@@ -1,0 +1,17 @@
+<%= form_with(model: foreign_key) do |form| %>
+  <% if foreign_key.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(foreign_key.errors.count, "error") %> prohibited this foreign_key from being saved:</h2>
+
+      <ul>
+        <% foreign_key.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

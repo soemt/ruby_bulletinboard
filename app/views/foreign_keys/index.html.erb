@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Foreign keys</h1>
+
+<div id="foreign_keys">
+  <% @foreign_keys.each do |foreign_key| %>
+    <%= render foreign_key %>
+    <p>
+      <%= link_to "Show this foreign key", foreign_key %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New foreign key", new_foreign_key_path %>

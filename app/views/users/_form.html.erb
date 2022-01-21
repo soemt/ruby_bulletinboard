@@ -1,0 +1,146 @@
+<div class="max-w-[940px] mx-auto rounded p-6 mt-4 border-solid border border-gray-300">
+  <%= form_with(model: user) do |form| %>
+    <div class="flex">
+      <div class="">
+        <%= image_tag("default_avatar.jpg", id: "profileImg", class: "shadow-xl rounded-full align-middle border-none min-w-[150px] max-w-[150px] h-[150px]") %>
+        <div class="mt-2 text-center">
+          <label class="text-blue-500 text-sm font-semibold cursor-pointer">
+            <%= form.file_field :profile, id: "profileUpload", class:"hidden form-control col-sm-5", :accept => "image/x-png,image/gif,image/jpeg" %>
+            Edit profile picture
+          </label>
+        </div>
+      </div>
+      <div class="border-solid mx-4 border-r border-gray-300 pr-4"></div>
+      <div class="grid grid-cols-2 w-full gap-2">
+        <div class="relative pb-4">
+          <%= form.label :name, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+          <%= form.text_field :name, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" %>
+          <% if user.errors[:name].present? %>
+            <svg
+                class="h-5 w-5 text-red-500 absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                  clip-rule="evenodd"
+              />
+            </svg>
+            <span class="mt-2 text-sm text-red-500">
+              <%= user.errors[:name][0] %>
+            </span>
+          <% end %>
+        </div>
+
+        <div class="relative pb-4">
+          <%= form.label :email, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+          <%= form.text_field :email, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" %>
+          <% if user.errors[:email].present? %>
+            <svg
+                class="h-5 w-5 text-red-500 absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                  clip-rule="evenodd"
+              />
+            </svg>
+            <span class="mt-2 text-sm text-red-500">
+              <%= user.errors[:email][0] %>
+            </span>
+          <% end %>
+        </div>
+
+        <div class="relative pb-4">
+          <%= form.label :password, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+          <%= form.password_field :password, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" %>
+          <% if user.errors[:password].present? %>
+            <svg
+                class="h-5 w-5 text-red-500 absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                  clip-rule="evenodd"
+              />
+            </svg>
+            <span class="mt-2 text-sm text-red-500">
+              <%= user.errors[:password][0] %>
+            </span>
+          <% end %>
+        </div>
+
+        <div class="relative pb-4">
+          <%= form.label :confirm_password, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+          <%= form.password_field :password_confirmation, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" %>
+          <% if user.errors[:password_confirmation].present? %>
+            <svg
+                class="h-5 w-5 text-red-500 absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                  clip-rule="evenodd"
+              />
+            </svg>
+            <span class="mt-2 text-sm text-red-500">
+              <%= user.errors[:password_confirmation][0] %>
+            </span>
+          <% end %>
+        </div>
+
+        <div class="pb-4">
+          <%= form.label :role, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+          <div class="select-wrapper">
+            <%= form.select(:role, options_for_select([['Admin', 0], ['User', 1]], 1), {}, {class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"}) %>
+          </div>
+        </div>
+
+        <div class="relative pb-4">
+          <%= form.label :phone, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+          <%= form.text_field :phone, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" %>
+          <% if user.errors[:phone].present? %>
+            <svg
+                class="h-5 w-5 text-red-500 absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                  clip-rule="evenodd"
+              />
+            </svg>
+            <span class="mt-2 text-sm text-red-500">
+              <%= user.errors[:phone][0] %>
+            </span>
+          <% end %>
+        </div>
+
+        <div class="pb-4">
+          <%= form.label :date_of_birth, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+          <%= form.date_field :dob, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" %>
+        </div>
+
+        <div class="pb-4 col-span-2">
+          <%= form.label :address, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+          <%= form.text_area :address, rows: 7, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" %>
+        </div>
+
+        <%= form.hidden_field :created_user_id, :value => current_user.id%>
+        <%= form.hidden_field :updated_user_id, :value => current_user.id%>
+        
+        <div>
+          <%= form.submit "Create User", class: "bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded cursor-pointer" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

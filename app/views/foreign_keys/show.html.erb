@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @foreign_key %>
+
+<div>
+  <%= link_to "Edit this foreign key", edit_foreign_key_path(@foreign_key) %> |
+  <%= link_to "Back to foreign keys", foreign_keys_path %>
+
+  <%= button_to "Destroy this foreign key", @foreign_key, method: :delete %>
+</div>

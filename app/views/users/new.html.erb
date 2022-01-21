@@ -1,0 +1,32 @@
+<h1 class="max-w-[940px] mx-auto text-xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-[25px]"> 
+  Create User 
+</h1>
+
+<%= render "form", user: @user %>
+
+<br>
+
+<div>
+  <%= link_to "Back to users", users_path, class: "relative mx-[5px] px-4 py-2 rounded-md text-sm font-medium border shadow focus:outline-none focus:ring transition text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100 active:bg-gray-200 focus:ring-gray-300" %>
+</div>
+
+<script>
+  function showImage(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#profileImg')
+          .attr('src', e.target.result)
+        sessionStorage.setItem('imgsrc', e.target.result)
+      };
+
+      reader.readAsDataURL(input.files[0]);
+      console.log(sessionStorage.getItem('imgsrc'))
+    }
+  }
+
+  $('#profileUpload').on('change', function() {
+    showImage(this);
+  })
+</script>

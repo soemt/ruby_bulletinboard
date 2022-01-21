@@ -1,0 +1,71 @@
+<div class="w-[340px] mx-auto mt-[20px]">
+  <h1 class="text-2xl sm:text-3xl font-medium text-gray-700 tracking-tight mb-4">
+    Reset Password
+  </h1>
+  <% if flash[:error] %>
+    <div class="error-box bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-4 rounded relative">
+      <span class="block">
+        <%= flash[:error] %>
+      </span>
+      <span class="close-btn absolute top-0 bottom-0 right-0 px-4 py-3">
+        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+      </span>
+    </div>
+  <% end %>
+  <div class="w-full rounded-md bg-gray-100">
+    <div class="p-[20px] py-[30px]">
+      <%= form_with model: @user, url: reset_password_url(token: params[:token]), method: :post do |f| %>
+        <div class="flex mb-5 font-medium justify-center">
+          Hello, <%= @user.name %>
+          <img src="<%= @user.profile %>" class="ml-2 rounded-full align-middle border-none min-w-[24px] max-w-[24px] h-[24px]">
+        </div>
+        
+        <div class="mb-4">
+          <%= f.label :new_password, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" %>
+          <%= f.password_field :password, required: true, class: "appearance-none block w-full bg-white text-gray-700 text-sm border border-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" %>
+          <% if @user.errors[:password].present? %>
+            <svg
+                class="h-5 w-5 text-red-500 absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                  clip-rule="evenodd"
+              />
+            </svg>
+            <span class="mt-2 text-sm text-red-500">
+              <%= @user.errors[:password][0] %>
+            </span>
+          <% end %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :confirm_password, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" %>
+          <%= f.password_field :password_confirmation, required: true, class: "appearance-none block w-full bg-white text-gray-700 text-sm border border-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" %>
+          <% if @user.errors[:password_confirmation].present? %>
+            <svg
+                class="h-5 w-5 text-red-500 absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                  clip-rule="evenodd"
+              />
+            </svg>
+            <span class="mt-2 text-sm text-red-500">
+              <%= @user.errors[:password_confirmation][0] %>
+            </span>
+          <% end %>
+        </div>
+  
+        <div>
+          <%= f.submit "Reset Password", class: "block w-full px-4 py-2 rounded-md text-sm font-medium border-0 focus:outline-none focus:ring transition text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 cursor-pointer" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
